@@ -1,13 +1,29 @@
+// Load environment variables before any other imports
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+// Configure dotenv with absolute path to the .env file
+const envPath = path.resolve(__dirname, '../.env');
+console.log('Loading environment variables from:', envPath);
+const result = dotenv.config({ path: envPath });
+
+if (result.error) {
+  console.error('Error loading .env file:', result.error);
+  process.exit(1);
+}
+
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path';
 import authRoutes from './routes/auth';
 import recipeRoutes from './routes/recipe';
 import productRoutes from './routes/product';
 
-// Load environment variables
-dotenv.config();
+// Verify environment variables are loaded
+console.log('Environment variables loaded:');
+console.log('PORT:', process.env.PORT);
+console.log('KROGER_CLIENT_ID:', process.env.KROGER_CLIENT_ID ? 'Set' : 'Not set');
+console.log('KROGER_CLIENT_SECRET:', process.env.KROGER_CLIENT_SECRET ? 'Set' : 'Not set');
+console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
 
 const app = express();
 const port = process.env.PORT || 3001;
