@@ -6,6 +6,7 @@ const recipeService = new RecipeService();
 
 // Parse recipe from URL
 router.post('/parse', async (req, res) => {
+  console.log('Recipe parse endpoint called with body:', req.body);
   const { url, servings } = req.body;
   console.log('Received recipe parse request:', { url, servings });
 
@@ -30,6 +31,7 @@ router.post('/parse', async (req, res) => {
       recipe.servings = servings;
     }
 
+    console.log('Sending recipe to client:', recipe);
     res.json(recipe);
   } catch (error) {
     console.error('Error parsing recipe:', error);
