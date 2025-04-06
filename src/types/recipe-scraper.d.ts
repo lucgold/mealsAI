@@ -14,5 +14,5 @@ declare module 'recipe-scraper' {
   }
 
   function recipeScraper(url: string): Promise<ScrapedRecipe>;
-  export default recipeScraper;
+  export = recipeScraper;
 } 
